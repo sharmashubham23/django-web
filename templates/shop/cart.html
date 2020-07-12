@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% block title %}Cart - Green Fasion
+{% endblock title %}
+{% block body %}
+<!-- Page Title-->
+    <div class="page-title-overlap bg-dark pt-4">
+      <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+        <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb breadcrumb-light flex-lg-nowrap justify-content-center justify-content-lg-start">
+              <li class="breadcrumb-item"><a class="text-nowrap" href="index.html"><i class="czi-home"></i>Home</a></li>
+              <li class="breadcrumb-item text-nowrap"><a href="shop-grid-ls.html">Shop</a>
+              </li>
+              <li class="breadcrumb-item text-nowrap active" aria-current="page">Cart</li>
+            </ol>
+          </nav>
+        </div>
+        <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+          <h1 class="h3 text-light mb-0">Your cart</h1>
+        </div>
+      </div>
+    </div>
+    <!-- Page Content-->
+    <div class="container pb-5 mb-2 mb-md-4">
+      <div class="row">
+        <!-- List of items-->
+        <section class="col-lg-8">
+          <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">
+            <h2 class="h6 text-light mb-0">Products</h2><a class="btn btn-outline-primary btn-sm pl-2" href="shop-grid-ls.html"><i class="czi-arrow-left mr-2"></i>Continue shopping</a>
+          </div>
+           <!-- Item-->
+          {% comment %} 
+          <!-- Item-->
+          <div id = "itemsincart" class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
+            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="img/shop/cart/02.jpg" alt="Product"></a>
+              <div class="media-body pt-2">
+                <h3 class="product-title font-size-base mb-2"><a href="shop-single-v1.html">TH Jeans City Backpack</a></h3>
+                <div class="font-size-sm"><span class="text-muted mr-2">Brand:</span>Tommy Hilfiger</div>
+                <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>Khaki</div>
+                <div class="font-size-lg text-accent pt-2">$79.<small>50</small></div>
+              </div>
+            </div>
+            <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">
+              <div class="form-group mb-0">
+                <label class="font-weight-medium" for="quantity2">Quantity</label>
+                <input class="form-control" type="number" id="quantity2" value="1">
+              </div>
+              <button class="btn btn-link px-0 text-danger" type="button"><i class="czi-close-circle mr-2"></i><span class="font-size-sm">Remove</span></button>
+            </div>
+          </div> {% endcomment %}
+                  <div class="my-4">
+            <ul class="list-group" id="itemsincart">
+            </ul>
+
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mt-3">
+                    <li class="breadcrumb-item active" aria-current="page">Your Cart Total Is <b>Rs. <span
+                                id="totalPricecart"></span></b>. Enter your details below & place your order. Thanks for
+                        using My Awesome Cart!</li>
+                </ol>
+            </nav>
+
+
+
+
+        </div>
+
+          <button class="btn btn-outline-accent btn-block" type="button"><i class="czi-loading font-size-base mr-2"></i>Update cart</button>
+        </section>
+        <!-- Sidebar-->
+        <aside class="col-lg-4 pt-4 pt-lg-0">
+          <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto">
+            <div class="text-center mb-4 pb-3 border-bottom">
+              <h2 class="h6 mb-3 pb-1">Subtotal</h2>
+              <h3 class="font-weight-normal">$265.<small>00</small></h3>
+            </div>
+            <div class="form-group mb-4">
+              <label class="mb-3" for="order-comments"><span class="badge badge-info font-size-xs mr-2">Note</span><span class="font-weight-medium">Additional comments</span></label>
+              <textarea class="form-control" rows="6" id="order-comments"></textarea>
+            </div>
+            <div class="accordion" id="order-options">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="accordion-heading"><a href="#promo-code" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="promo-code">Apply promo code<span class="accordion-indicator"></span></a></h3>
+                </div>
+                <div class="collapse show" id="promo-code" data-parent="#order-options">
+                  <form class="card-body needs-validation" method="post" novalidate>
+                    <div class="form-group">
+                      <input class="form-control" type="text" placeholder="Promo code" required>
+                      <div class="invalid-feedback">Please provide promo code.</div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-block" type="submit">Apply promo code</button>
+                  </form>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="accordion-heading"><a class="collapsed" href="#shipping-estimates" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="shipping-estimates">Shipping estimates<span class="accordion-indicator"></span></a></h3>
+                </div>
+                <div class="collapse" id="shipping-estimates" data-parent="#order-options">
+                  <div class="card-body">
+                    <form class="needs-validation" novalidate>
+                      <div class="form-group">
+                        <select class="form-control custom-select" required>
+                          <option value="">Choose your country</option>
+                          <option value="Australia">Australia</option>
+                          <option value="Belgium">Belgium</option>
+                          <option value="Canada">Canada</option>
+                          <option value="Finland">Finland</option>
+                          <option value="Mexico">Mexico</option>
+                          <option value="New Zealand">New Zealand</option>
+                          <option value="Switzerland">Switzerland</option>
+                          <option value="United States">United States</option>
+                        </select>
+                        <div class="invalid-feedback">Please choose your country!</div>
+                      </div>
+                      <div class="form-group">
+                        <select class="form-control custom-select" required>
+                          <option value="">Choose your city</option>
+                          <option value="Bern">Bern</option>
+                          <option value="Brussels">Brussels</option>
+                          <option value="Canberra">Canberra</option>
+                          <option value="Helsinki">Helsinki</option>
+                          <option value="Mexico City">Mexico City</option>
+                          <option value="Ottawa">Ottawa</option>
+                          <option value="Washington D.C.">Washington D.C.</option>
+                          <option value="Wellington">Wellington</option>
+                        </select>
+                        <div class="invalid-feedback">Please choose your city!</div>
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="text" placeholder="ZIP / Postal code" required>
+                        <div class="invalid-feedback">Please provide a valid zip!</div>
+                      </div>
+                      <button class="btn btn-outline-primary btn-block" type="submit">Calculate shipping</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div><a class="btn btn-primary btn-shadow btn-block mt-4" href="checkout-details.html"><i class="czi-card font-size-lg mr-2"></i>Proceed to Checkout</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <!-- Footer-->
+    
+    <!-- Toolbar for handheld devices-->
+    <div class="cz-handheld-toolbar">
+      <div class="d-table table-fixed w-100"><a class="d-table-cell cz-handheld-toolbar-item" href="account-wishlist.html"><span class="cz-handheld-toolbar-icon"><i class="czi-heart"></i></span><span class="cz-handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="#navbarCollapse" data-toggle="collapse" onclick="window.scrollTo(0, 0)"><span class="cz-handheld-toolbar-icon"><i class="czi-menu"></i></span><span class="cz-handheld-toolbar-label">Menu</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="shop-cart.html"><span class="cz-handheld-toolbar-icon"><i class="czi-cart"></i><span class="badge badge-primary badge-pill ml-1">4</span></span><span class="cz-handheld-toolbar-label">$265.00</span></a>
+      </div>
+    </div>
+    <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted font-size-sm mr-2">Top</span><i class="btn-scroll-top-icon czi-arrow-up">   </i></a>
+
+{% endblock body %}
+
+{% block js %}
+<script>
+// Find out the cart items from localStorage
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updateCart(cart);
+}
+
+  for(i in cart){
+    var name = cart[i][1];
+    var qty = cart[i][0];
+    var itemPrice = cart[i][2];
+
+    totalPrice = totalPrice + qty*itemPrice;
+    totalqty = qty +totalqty;
+            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name} Rs. ${itemPrice}
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+                </li>`
+        
+        if(cart[i][0] != 0){
+          $('#itemsincart').append(mystr);
+        }
+  }
+</script>
+
+  <script>
+//main JavaScript
+//console.log(cart);
+
+updateCartshown(cart);
+// Find out the cart items from localStorage
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updateCart(cart);
+}
+// If the add to cart button is clicked, add/increment the item
+//$('.cart').click(function() {
+    $('.divpr').on('click', 'button.cart', function(){
+      console.log("clicked bhai")
+    var idstr = this.id.toString();
+    console.log(idstr);
+    console.log("uper is idstr");
+    if (cart[idstr] != undefined) {
+        qty = cart[idstr][0] + 1;
+    } else {
+        qty = 1;
+        name = document.getElementById('name'+idstr).innerHTML;
+        price = document.getElementById('price'+idstr).innerHTML;
+        cart[idstr] = [qty, name, price];
+    }
+    updateCart(cart);
+});
+//Add Popover to cart
+$('#popcart23').popover();
+updatePopover(cart);
+function updatePopover(cart) {
+    //console.log('We are inside updatePopover');
+    var popStr = "";
+    popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+    var i = 1;
+    for (var item in cart) {
+        popStr = popStr + "<b>" + i + "</b>. ";
+        popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+        i = i + 1;
+    }
+    popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
+    console.log(popStr);
+    document.getElementById('popcart').setAttribute('data-content', popStr);
+} 
+
+//function for removeItems from cart
+{% comment %} function removeItemcart(cart){
+
+} {% endcomment %}
+
+
+function clearCart() {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    for (var item in cart) {
+        document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">Add To Cart</button>'
+    }
+    localStorage.clear();
+    cart = {};
+    updateCart(cart);
+}
+function updateCart(cart) {
+    var sum = 0;
+    for (var item in cart) {
+        sum = sum + cart[item][0];
+        //document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = sum;
+    console.log(cart);
+    updatePopover(cart);
+    updateCartshown(cart);
+}
+// If plus or minus button is clicked, change the cart as well as the display value
+{% comment %} $('.divpr').on("click", "button.minus", function() {
+    a = this.id.slice(7, );
+    cart['pr' + a][0] = cart['pr' + a][0] - 1;
+    cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+    document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+    updateCart(cart);
+});
+$('.divpr').on("click", "button.plus", function() {
+    a = this.id.slice(6, );
+    cart['pr' + a][0] = cart['pr' + a][0] + 1;
+    document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+    updateCart(cart);
+}); {% endcomment %}
+
+//start new script
+function updateCartshown(cart){
+  var sum = 0;
+  var totalPrice = 0;
+  var totalqty = 0;
+  $("#items").empty();
+
+  for(i in cart){
+    var name = cart[i][1];
+    var qty = cart[i][0];
+    var itemPrice = cart[i][2];
+
+    totalPrice = totalPrice + qty*itemPrice;
+    totalqty = qty +totalqty;
+            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name} Rs. ${itemPrice}
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+                </li>`
+            mystr2 = `<div class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
+            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="img/shop/cart/01.jpg" alt="Product"></a>
+              <div class="media-body pt-2">
+                <h3 class="product-title font-size-base mb-2"><a href="shop-single-v1.html">${name}</a></h3>
+                <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>8.5</div>
+                <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>White &amp; Blue</div>
+                <div class="font-size-lg text-accent pt-2">${itemPrice}</div>
+              </div>
+            </div>
+            <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">
+              <div class="form-group mb-0">
+                <label class="font-weight-medium" for="quantity1">Quantity</label>
+                <input class="form-control" type="number" id="quantity1" value="1">
+              </div>
+              <button class="btn btn-link px-0 text-danger" type="button"><i class="czi-close-circle mr-2"></i><span class="font-size-sm">Remove</span></button>
+            </div>
+          </div>`
+        
+        if(cart[i][0] != 0){
+          //$('#itemsincart').append(mystr);
+          $('#itemsincart').append(mystr2);
+        }
+  }
+  document.getElementById('totalPrice1').innerHTML = totalPrice;
+  document.getElementById('totalPrice').innerHTML = totalPrice;
+  document.getElementById('totalPricecart').innerHTML = totalPrice;
+  document.getElementById('totalItems').innerHTML = totalqty;
+
+}
+$('#itemsJson').val(JSON.stringify(cart));
+
+$('#amount').val($('#totalPrice').html())
+//end of new script
+
+
+
+</script>
+
+{% endblock js %}

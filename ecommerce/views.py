@@ -4,4 +4,4 @@ from django.shortcuts import render, HttpResponse
 
 
 def home(request):
-    return HttpResponse('This is home page for ecomm')
+    return render(request, 'index.html')

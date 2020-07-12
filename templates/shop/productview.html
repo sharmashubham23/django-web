@@ -4,6 +4,8 @@
 {% endblock title %}
 
 {% block body %}
+{% comment %} <span type = "hidden" id = "prodid">TIS is product id{{product.id}}</span> {% endcomment %}
+<input type="hidden" id = "prodid" value = "pr{{product.id}}">
     <div class="page-title-overlap bg-dark pt-4">
       <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
         <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
@@ -17,7 +19,7 @@
           </nav>
         </div>
         <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
-          <h1 class="h3 text-light mb-0">Sports Hooded Sweatshirt</h1>
+          <h1 class="h3 text-light mb-0" id="namepviewpr{{product.id}}">{{product.product_name}}</h1>
         </div>
       </div>
     </div>
@@ -27,12 +29,11 @@
       <div class="bg-light box-shadow-lg rounded-lg px-4 py-3 mb-5">
         <div class="px-lg-3">
           <div class="row">
-          {% for i in product %}
             <!-- Product gallery-->
             <div class="col-lg-7 pr-lg-0 pt-lg-4">
               <div class="cz-product-gallery">
                 <div class="cz-preview order-sm-2">
-                  <div class="cz-preview-item active" id="first"><img class="cz-image-zoom" src="/media/{{i.image}}" data-zoom="/media/{{i.image}}" alt="Product image">
+                  <div class="cz-preview-item active" id="first"><img class="cz-image-zoom" style="height: 637px;" src="/media/{{product.image}}" data-zoom="/media/{{product.image}}" alt="Product image">
                     <div class="cz-image-zoom-pane"></div>
                   </div>
                   <div class="cz-preview-item" id="second"><img class="cz-image-zoom" src="img/shop/single/gallery/02.jpg" data-zoom="img/shop/single/gallery/02.jpg" alt="Product image">
@@ -49,16 +50,15 @@
                     <div class="cz-thumblist-item-text"><i class="czi-video"></i>Video</div></a></div>
               </div>
             </div>
-            {% endfor %}
             <!-- Product details-->
             <div class="col-lg-5 pt-4 pt-lg-0">
               <div class="product-details ml-auto pb-3">
                 <div class="d-flex justify-content-between align-items-center mb-2"><a href="#reviews" data-scroll>
-                    <div class="star-rating"><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star-filled active"></i><i class="sr-star czi-star"></i>
+                    <div class="star-rating"><i class="sr-star fa fa-star checked active"></i><i class="sr-star fa fa-star checked active"></i><i class="sr-star fa fa-star checked active"></i><i class="sr-star fa fa-star "></i><i class="sr-star fa fa-star"></i>
                     </div><span class="d-inline-block font-size-sm text-body align-middle mt-1 ml-1">74 Reviews</span></a>
-                  <button class="btn-wishlist mr-0 mr-lg-n3" type="button" data-toggle="tooltip" title="Add to wishlist"><i class="czi-heart"></i></button>
+                  <button class="btn-wishlist mr-0 mr-lg-n3" type="button" data-toggle="tooltip" title="Add to wishlist"><i class="fa">&#xf08a;</i></button>
                 </div>
-                <div class="mb-3"><span class="h3 font-weight-normal text-accent mr-1">$18.<small>99</small></span>
+                <div class="mb-3"><span id="pricepviewpr{{product.id}}" class="h3 font-weight-normal text-accent mr-1">{{product.price}}</span>
                   <del class="text-muted font-size-lg mr-3">$25.<small>00</small></del><span class="badge badge-danger badge-shadow align-middle mt-n2">Sale</span>
                 </div>
                 <div class="font-size-sm mb-4"><span class="text-heading font-weight-medium mr-1">Color:</span><span class="text-muted" id="colorOption">Red/Dark blue/White</span></div>
@@ -75,11 +75,11 @@
                     <input class="custom-control-input" type="radio" name="color" id="color3" data-label="colorOption" value="Dark grey/White/Orange">
                     <label class="custom-option-label rounded-circle" for="color3"><span class="custom-option-color rounded-circle" style="background-image: url(img/shop/single/color-opt-3.png)"></span></label>
                   </div>
-                  <div class="product-badge product-available mt-n1"><i class="czi-security-check"></i>Product available</div>
+                  <div class="product-badge product-available mt-n1"><i class="fas fa-check"></i>Product available</div>
                 </div>
                 <form class="mb-grid-gutter" method="post">
                   <div class="form-group">
-                    <div class="d-flex justify-content-between align-items-center pb-1">
+                    {% comment %} <div class="d-flex justify-content-between align-items-center pb-1">
                       <label class="font-weight-medium" for="product-size">Size:</label><a class="nav-link-style font-size-sm" href="#size-chart" data-toggle="modal"><i class="czi-ruler lead align-middle mr-1 mt-n1"></i>Size guide</a>
                     </div>
                     <select class="custom-select" required id="product-size">
@@ -89,7 +89,7 @@
                       <option value="m">M</option>
                       <option value="l">L</option>
                       <option value="xl">XL</option>
-                    </select>
+                    </select> {% endcomment %}
                   </div>
                   <div class="form-group d-flex align-items-center">
                     <select class="custom-select mr-3" style="width: 5rem;">
@@ -99,14 +99,14 @@
                       <option value="4">4</option>
                       <option value="5">5</option>
                     </select>
-                    <button class="btn btn-primary btn-shadow btn-block" type="submit"><i class="czi-cart font-size-lg mr-2"></i>Add to Cart</button>
+                    <button class="btn btn-primary btn-shadow btn-block" id = "prodcart" type = "button" ><i class="fa fa-shopping-cart font-size-lg mr-2"></i> Add to Cart </button>
                   </div>
                 </form>
                 <!-- Product panels-->
                 <div class="accordion mb-4" id="productPanels">
                   <div class="card">
                     <div class="card-header">
-                      <h3 class="accordion-heading"><a href="#productInfo" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="productInfo"><i class="czi-announcement text-muted font-size-lg align-middle mt-n1 mr-2"></i>Product info<span class="accordion-indicator"><i data-feather="chevron-up"></i></span></a></h3>
+                      <h3 class="accordion-heading"><a href="#productInfo" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="productInfo"><i class="czi-announcement text-muted font-size-lg align-middle mt-n1 mr-2"></i>Product info<span class="accordion-indicator"><i class ="fa fa-angle-down"></i></span></a></h3>
                     </div>
                     <div class="collapse show" id="productInfo" data-parent="#productPanels">
                       <div class="card-body">
@@ -593,99 +593,90 @@
         </div>
       </div>
     </div>
-    <!-- Footer-->
-    <footer class="bg-dark pt-5">
-      <div class="container">
-        <div class="row pb-2">
-          <div class="col-md-4 col-sm-6">
-            <div class="widget widget-links widget-light pb-2 mb-4">
-              <h3 class="widget-title text-light">Shop departments</h3>
-              <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Sneakers &amp; Athletic</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Athletic Apparel</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Sandals</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Jeans</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Shirts &amp; Tops</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Shorts</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">T-Shirts</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Swimwear</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Clogs &amp; Mules</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Bags &amp; Wallets</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Accessories</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Sunglasses &amp; Eyewear</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Watches</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4 col-sm-6">
-            <div class="widget widget-links widget-light pb-2 mb-4">
-              <h3 class="widget-title text-light">Account &amp; shipping info</h3>
-              <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Your account</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Shipping rates &amp; policies</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Refunds &amp; replacements</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Order tracking</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Delivery info</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Taxes &amp; fees</a></li>
-              </ul>
-            </div>
-            <div class="widget widget-links widget-light pb-2 mb-4">
-              <h3 class="widget-title text-light">About us</h3>
-              <ul class="widget-list">
-                <li class="widget-list-item"><a class="widget-list-link" href="#">About company</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Our team</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">Careers</a></li>
-                <li class="widget-list-item"><a class="widget-list-link" href="#">News</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="widget pb-2 mb-4">
-              <h3 class="widget-title text-light pb-1">Stay informed</h3>
-              <form class="validate" action="https://studio.us12.list-manage.com/subscribe/post-json?u=c7103e2c981361a6639545bd5&amp;amp;id=29ca296126&amp;c=?" method="get" name="mc-embedded-subscribe-form" id="mc-embedded-subscribe-form">
-                <div class="input-group input-group-overlay flex-nowrap">
-                  <div class="input-group-prepend-overlay"><span class="input-group-text text-muted font-size-base"><i class="czi-mail"></i></span></div>
-                  <input class="form-control prepended-form-control" type="email" name="EMAIL" id="mce-EMAIL" value="" placeholder="Your email" required>
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit" name="subscribe" id="mc-embedded-subscribe">Subscribe*</button>
-                  </div>
-                </div>
-{% endblock body %}
 
+{% endblock body %}
 
 {% block js %}
 <script>
 console.log('working');
+console.log("idstr is ");
+var idstr = document.getElementById('prodid').value;
+console.log(idstr);
 
-if(localStorage.getItem('cart') == null){
-var cart = {};
+updateCartshown(cart);
+
+if (localStorage.getItem('cart') == null) {
+    var cart = {};
+} else {
+    cart = JSON.parse(localStorage.getItem('cart'));
+    updateCart(cart);
 }
-
-else
-{
-cart = JSON.parse(localStorage.getItem('cart'));
-document.getElementById('cart').innerHTML = Object.keys(cart).length;
-}
-
-$('.cart').click(function(){
+updateCart(cart);
+$('#prodcart').click(function(){
 
 console.log('clicked');
-var idstr = this.id.toString();
 console.log(idstr);
-if (cart[idstr] !=undefined){
-cart[idstr] = cart[idstr] + 1;
-}
-else
-{
-cart[idstr] = 1;
-}
+console.log("In prodview .html page")
+
 console.log(cart);
-localStorage.setItem('cart', JSON.stringify(cart));
-document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+    if (cart[idstr] != undefined) {
+        qty = cart[idstr][0] + 1;
+    } else {
+        qty = 1;
+        name = document.getElementById('namepview'+idstr).innerHTML;
+        price = document.getElementById('pricepview'+idstr).innerHTML;
+        cart[idstr] = [qty, name, price];
+    }
+    //localStorage.setItem('cart', JSON.stringify(cart));
+    //document.getElementById('cart').innerHTML = Object.keys(cart).length;
+    updateCartshown(cart);
+    updateCart(cart);
+
 });
+function updateCart(cart) {
+    var sum = 0;
+    for (var item in cart) {
+        sum = sum + cart[item][0];
+        //document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = sum;
+    console.log(cart);
+    updatePopover(cart);
+    updateCartshown(cart);
+}
+
 $('#popcart').popover();
 
 document.getElementById("popcart").setAttribute('data-content', '<h5>Cart for your items in my shopping cart</h5>');
+function updateCart(cart) {
+    var sum = 0;
+    for (var item in cart) {
+        sum = sum + cart[item][0];
+        //document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    document.getElementById('cart').innerHTML = sum;
+    console.log(cart);
+    updatePopover(cart);
+    updateCartshown(cart);
+}
+function updatePopover(cart) {
+    //console.log('We are inside updatePopover');
+    var popStr = "";
+    popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+    var i = 1;
+    for (var item in cart) {
+        popStr = popStr + "<b>" + i + "</b>. ";
+        //popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+        i = i + 1;
+    }
+    popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
+    console.log(popStr);
+    document.getElementById('popcart').setAttribute('data-content', popStr);
+} 
+updateCart(cart);
 
 </script>
-{% endblock %}
+{% endblock %} 
