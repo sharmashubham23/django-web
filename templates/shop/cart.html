@@ -26,7 +26,7 @@
         <!-- List of items-->
         <section class="col-lg-8">
           <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">
-            <h2 class="h6 text-light mb-0">Products</h2><a class="btn btn-outline-primary btn-sm pl-2" href="shop-grid-ls.html"><i class="czi-arrow-left mr-2"></i>Continue shopping</a>
+            <h2 class="h6 text-light mb-0">Products</h2><a class="btn btn-outline-primary btn-sm pl-2" href="/shop/"><i class="fa fa-shopping-bag mr-2"></i>Continue shopping</a>
           </div>
            <!-- Item-->
           {% comment %} 
@@ -65,14 +65,14 @@
 
         </div>
 
-          <button class="btn btn-outline-accent btn-block" type="button"><i class="czi-loading font-size-base mr-2"></i>Update cart</button>
+          <button onclick="refreshcartbtn(cart)" class="btn btn-outline-accent btn-block" type="button"><i class="fa fa-refresh"></i> Update cart</button>
         </section>
         <!-- Sidebar-->
         <aside class="col-lg-4 pt-4 pt-lg-0">
           <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto">
             <div class="text-center mb-4 pb-3 border-bottom">
               <h2 class="h6 mb-3 pb-1">Subtotal</h2>
-              <h3 class="font-weight-normal">$265.<small>00</small></h3>
+              <h3 class="font-weight-normal" >₹ <span id ="totalpricecheckout"></span> </h3>
             </div>
             <div class="form-group mb-4">
               <label class="mb-3" for="order-comments"><span class="badge badge-info font-size-xs mr-2">Note</span><span class="font-weight-medium">Additional comments</span></label>
@@ -137,7 +137,7 @@
                   </div>
                 </div>
               </div>
-            </div><a class="btn btn-primary btn-shadow btn-block mt-4" href="checkout-details.html"><i class="czi-card font-size-lg mr-2"></i>Proceed to Checkout</a>
+            </div><a class="btn btn-primary btn-shadow btn-block mt-4" href="/shop/checkout/"><i class="fa fa-credit-card font-size-lg mr-2"></i>Proceed to Checkout</a>
           </div>
         </aside>
       </div>
@@ -146,7 +146,7 @@
     
     <!-- Toolbar for handheld devices-->
     <div class="cz-handheld-toolbar">
-      <div class="d-table table-fixed w-100"><a class="d-table-cell cz-handheld-toolbar-item" href="account-wishlist.html"><span class="cz-handheld-toolbar-icon"><i class="czi-heart"></i></span><span class="cz-handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="#navbarCollapse" data-toggle="collapse" onclick="window.scrollTo(0, 0)"><span class="cz-handheld-toolbar-icon"><i class="czi-menu"></i></span><span class="cz-handheld-toolbar-label">Menu</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="shop-cart.html"><span class="cz-handheld-toolbar-icon"><i class="czi-cart"></i><span class="badge badge-primary badge-pill ml-1">4</span></span><span class="cz-handheld-toolbar-label">$265.00</span></a>
+      <div class="d-table table-fixed w-100"><a class="d-table-cell cz-handheld-toolbar-item" href="account-wishlist.html"><span class="cz-handheld-toolbar-icon"><i class="czi-heart"></i></span><span class="cz-handheld-toolbar-label">Wishlist</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="#navbarCollapse" data-toggle="collapse" onclick="window.scrollTo(0, 0)"><span class="cz-handheld-toolbar-icon"><i class="fa fa-bars"></i></span><span class="cz-handheld-toolbar-label">Menu</span></a><a class="d-table-cell cz-handheld-toolbar-item" href="shop-cart.html"><span class="cz-handheld-toolbar-icon"><i class="czi-cart"></i><span class="badge badge-primary badge-pill ml-1">4</span></span><span class="cz-handheld-toolbar-label">$265.00</span></a>
       </div>
     </div>
     <!-- Back To Top Button--><a class="btn-scroll-top" href="#top" data-scroll><span class="btn-scroll-top-tooltip text-muted font-size-sm mr-2">Top</span><i class="btn-scroll-top-icon czi-arrow-up">   </i></a>
@@ -162,7 +162,7 @@ if (localStorage.getItem('cart') == null) {
     cart = JSON.parse(localStorage.getItem('cart'));
     updateCart(cart);
 }
-
+ {% comment %} var totalqty = 0
   for(i in cart){
     var name = cart[i][1];
     var qty = cart[i][0];
@@ -178,13 +178,13 @@ if (localStorage.getItem('cart') == null) {
         if(cart[i][0] != 0){
           $('#itemsincart').append(mystr);
         }
-  }
+  } {% endcomment %}
 </script>
 
   <script>
 //main JavaScript
 //console.log(cart);
-
+updateCartpage(cart);
 updateCartshown(cart);
 // Find out the cart items from localStorage
 if (localStorage.getItem('cart') == null) {
@@ -206,7 +206,9 @@ if (localStorage.getItem('cart') == null) {
         qty = 1;
         name = document.getElementById('name'+idstr).innerHTML;
         price = document.getElementById('price'+idstr).innerHTML;
-        cart[idstr] = [qty, name, price];
+        image = document.getElementById('img' + idstr).src;
+        idforremove = idstr;
+        cart[idstr] = [qty, name, price, image, idforremove];
     }
     updateCart(cart);
 });
@@ -220,7 +222,7 @@ function updatePopover(cart) {
     var i = 1;
     for (var item in cart) {
         popStr = popStr + "<b>" + i + "</b>. ";
-        popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
+        //popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
         i = i + 1;
     }
     popStr = popStr + "</div> <a href='/shop/checkout'><button class='btn btn-primary' id ='checkout'>Checkout</button></a> <button class='btn btn-primary' onclick='clearCart()' id ='clearCart'>Clear Cart</button>     "
@@ -255,8 +257,8 @@ function updateCart(cart) {
     updatePopover(cart);
     updateCartshown(cart);
 }
-// If plus or minus button is clicked, change the cart as well as the display value
-{% comment %} $('.divpr').on("click", "button.minus", function() {
+{% comment %} // If plus or minus button is clicked, change the cart as well as the display value
+$('.divpr').on("click", "button.minus", function() {
     a = this.id.slice(7, );
     cart['pr' + a][0] = cart['pr' + a][0] - 1;
     cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
@@ -268,62 +270,179 @@ $('.divpr').on("click", "button.plus", function() {
     cart['pr' + a][0] = cart['pr' + a][0] + 1;
     document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
     updateCart(cart);
-}); {% endcomment %}
+});  {% endcomment %}
 
 //start new script
+//function for navbar cart shown
 function updateCartshown(cart){
   var sum = 0;
   var totalPrice = 0;
-  var totalqty = 0;
+  var totalqty1 = 0;
   $("#items").empty();
-
+  var totalqty = 0;
   for(i in cart){
     var name = cart[i][1];
     var qty = cart[i][0];
     var itemPrice = cart[i][2];
+    var imgsrc = cart[i][3];
+    //var img = new Image();
+    //img.src = "https://demo.createx.studio/cartzilla/img/shop/catalog/01.jpg";
+    var x = document.createElement("IMG");
+    x.setAttribute("src", imgsrc);
+    x.setAttribute("width", "304");
+    x.setAttribute("height", "228");
+    x.setAttribute("alt", "The Pulpit Rock");
+    totalPrice = totalPrice + qty*itemPrice;
+    totalqty = parseInt(qty) + parseInt(totalqty);
+            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    ${name} Rs. ${itemPrice}  
+                    <span class="badge badge-primary badge-pill">${qty}</span>
+
+                </li>`
+        if(cart[i][0] != 0){
+          //$('#items').append(x);
+          $('#items').append(mystr);
+        }
+  }
+
+  document.getElementById('totalPrice1').innerHTML = totalPrice;
+  document.getElementById('totalPrice').innerHTML = totalPrice;
+  document.getElementById('totalItems').innerHTML = totalqty;
+  document.getElementById('toolbaritems').innerHTML = totalqty;
+  document.getElementById('toolbarprice').innerHTML = totalPrice;
+
+
+}
+
+
+//function for cart page product shown
+function updateCartpage(cart){
+  var sum = 0;
+  var totalPrice = 0;
+  var totalqty = 0;
+  $("#items").empty();
+  var counter = Object.keys(cart).length
+  var productnumber = 1;
+  for(i in cart){
+    var name = cart[i][1];
+    var qty = cart[i][0];
+    var itemPrice = cart[i][2];
+    var imgsrc = cart[i][3];
+    var idremove = cart[i][4];
+
+    var x = document.createElement("IMG");
+    x.setAttribute("src", imgsrc);
+    x.setAttribute("width", "304");
+    x.setAttribute("height", "228");
+    x.setAttribute("alt", "The Pulpit Rock");
 
     totalPrice = totalPrice + qty*itemPrice;
-    totalqty = qty +totalqty;
-            mystr = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${name} Rs. ${itemPrice}
-                    <span class="badge badge-primary badge-pill">${qty}</span>
-                </li>`
+    totalqty = parseInt(qty) + parseInt(totalqty);
+            
             mystr2 = `<div class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
-            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" href="shop-single-v1.html" style="width: 10rem;"><img src="img/shop/cart/01.jpg" alt="Product"></a>
+            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left"><a class="d-inline-block mx-auto mr-sm-4" id ="imgcart${counter}" href="shop-single-v1.html" style="width: 10rem;"></a>
               <div class="media-body pt-2">
-                <h3 class="product-title font-size-base mb-2"><a href="shop-single-v1.html">${name}</a></h3>
-                <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>8.5</div>
+                <h2 class="product-title font-size-base mb-2"><a href="shop-single-v1.html">${name}</a></h2>
+                <div class="font-size-sm"><span class="text-muted mr-2">Quantity:</span>${qty}</div>
                 <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>White &amp; Blue</div>
-                <div class="font-size-lg text-accent pt-2">${itemPrice}</div>
+                <div class="font-size-lg text-accent pt-2"><span>₹</span> ${itemPrice}</div>
+                <input type="hidden" id = "r${counter}" value = "${idremove}">
               </div>
             </div>
             <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">
               <div class="form-group mb-0">
                 <label class="font-weight-medium" for="quantity1">Quantity</label>
-                <input class="form-control" type="number" id="quantity1" value="1">
+                <input class="form-control" type="number" id="quantity${productnumber}" min = "0" value="1">
               </div>
-              <button class="btn btn-link px-0 text-danger" type="button"><i class="czi-close-circle mr-2"></i><span class="font-size-sm">Remove</span></button>
+              <button id = "idr${idremove}" onclick="myFunction(this.id)"  class="btn btn-link px-0 text-danger" type="button"><i class="fa fa-times-circle-o"></i><span class="font-size-sm" style="padding: 8px;">Remove</span></button>
             </div>
           </div>`
+          
         
-        if(cart[i][0] != 0){
-          //$('#itemsincart').append(mystr);
+        if(cart[i][0] != 0){     
+              
+          //document.getElementById('imgcart'+counter).append(x);
+          //document.getElementById('imgcart').id = 'imgcart'+counter;
+          s= counter;
+          
+          
+          //document.getElementById('imgcart'+).append(x)
+          console.log("imgcart + counter");
+          console.log(counter); 
+          
           $('#itemsincart').append(mystr2);
+          $('#imgcart'+s.toString()).append(x);
         }
+        counter = counter -1;
+        productnumber = productnumber + 1;
+        
   }
   document.getElementById('totalPrice1').innerHTML = totalPrice;
   document.getElementById('totalPrice').innerHTML = totalPrice;
   document.getElementById('totalPricecart').innerHTML = totalPrice;
-  document.getElementById('totalItems').innerHTML = totalqty;
+  //document.getElementById('totalItems').innerHTML = totalqty;
+  //document.getElementById('toolbaritems').innerHTML = totalqty;
+  document.getElementById('toolbarprice').innerHTML = totalPrice;
+  document.getElementById('totalpricecheckout').innerHTML = totalPrice;
 
 }
 $('#itemsJson').val(JSON.stringify(cart));
 
 $('#amount').val($('#totalPrice').html())
+
 //end of new script
+function myFunction(idbyremove) {
+  var objectname = ""
+  console.log("idbyremoveis ");
+  console.log(idbyremove);
+  afterslice = idbyremove.slice(3, );
+  objectname = afterslice;
+  console.log(objectname);
+  delete cart[objectname];
+  console.log("Cart item deleted");
+  updateCart(cart);
+  updateCartshown(cart);
+  updateCartpage(cart);
+  location.reload()
+  //console.log(cart);
+}
+function refreshcartbtn(cart){
+  var newqty = 1;
+  var numberloop = Object.keys(cart).length;
+  var arr = []
+  var n = 1;
+  var num = 0;
+  while (n <= numberloop){
+  console.log("n is ",n);
+  newqty = document.getElementById('quantity'+n).value;
+  arr.push(newqty);
+  console.log(arr);
+  n = n+1;
+  }
 
 
-
+  //console.log(q);
+  //$('#totalItems').innerHTML = 144;
+  //document.getElementById("toolbaritems").innerHTML = q; 
+  console.log("above is newqty");
+  console.log(arr.reduce((a, b) => a + b, 0));
+  for(j in cart){
+    console.log("in j cart")
+  
+    cart[j][0] = arr[num];
+    console.log("in if new qty > 1");
+    
+    console.log(cart)
+    num = num +1;
+    
+    //updateCartshown(cart);
+    //updateCartpage(cart); 
+  }
+  updateCart(cart);
+  //document.getElementById("totalItems").style.display = "none";
+}
+//updateCartshown(cart);
+//updateCartpage(cart);
 </script>
 
 {% endblock js %}

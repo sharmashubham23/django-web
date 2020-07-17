@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Search -Green Fashion
+{% endblock title %}
+{% block body %}
+
+  <!-- Products grid (Trending products)-->
+  <section class="container pt-md-3 pb-5 mb-md-3" style="
+  margin-top: 157px;
+">
+    <h2 class="h3 text-center">Trending products</h2>
+    <div class="row pt-4 mx-n2">
+      <!-- Product-->
+      {% for i in product  %}
+      <div class="col-lg-3 col-md-4 col-sm-6 px-2 mb-4" style="height: 429px;max-height: 429px;">
+        <div class="card product-card">
+          <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left"
+            title="Add to wishlist"><i class="fa">&#xf08a;</i></button><a class="card-img-top d-block overflow-hidden"
+            href="/shop/products/{{i.id}} " ><img id ="imgpr{{i.id}}" src="/media/{{i.image}}" 
+              alt="Product" style="height: 255px; width: 100%"></a>
+          <div class="card-body py-2"><a class="product-meta d-block font-size-xs pb-1"id="namepr{{i.id}}" href="productview/">{{i.product_name}}</a>
+            <h3 class="product-title font-size-sm"><a href="productview/">{{i.category}}</a></h3>
+            <div class="d-flex justify-content-between">
+              <div class="product-price text-accent">₹ <span class="text-accent" id="pricepr{{i.id}}">{{i.price}}</span></div>
+              <div class="star-rating"><i class="sr-star fa fa-star checked active"></i><i
+                  class="sr-star fa fa-star checked active"></i><i class="sr-star fa fa-star checked active"></i><i
+                  class="sr-star fa fa-star checked active"></i><i class="sr-star fa fa-star"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-body card-body-hidden">
+            <div class="text-center pb-2">
+              <div class="custom-control custom-option custom-control-inline mb-2">
+                <input class="custom-control-input" type="radio" name="size1" id="s-75">
+                <label class="custom-option-label" for="s-75">7.5</label>
+              </div>
+              <div class="custom-control custom-option custom-control-inline mb-2">
+                <input class="custom-control-input" type="radio" name="size1" id="s-80" checked>
+                <label class="custom-option-label" for="s-80">8</label>
+              </div>
+              <div class="custom-control custom-option custom-control-inline mb-2">
+                <input class="custom-control-input" type="radio" name="size1" id="s-85">
+                <label class="custom-option-label" for="s-85">8.5</label>
+              </div>
+              <div class="custom-control custom-option custom-control-inline mb-2">
+                <input class="custom-control-input" type="radio" name="size1" id="s-90">
+                <label class="custom-option-label" for="s-90">9</label>
+              </div>
+            </div>
+            <span id="divpr{{i.id}}" class="divpr">
+            <button class="btn btn-primary btn-sm btn-block mb-2 cart" id="pr{{i.id}}" type="button" data-toggle="toast"
+              data-target="#cart-toast"><i class="fa fa-shopping-cart font-size-sm mr-1 "></i>Add to Cart</button>
+            </span>
+
+          </div>
+        </div>
+        <hr class="d-sm-none">
+      </div>
+    {% endfor %}
+{% endblock body %}
+{% block js %}
+<script>
+{% if msg|length != 0 %}
+alert('{{msg}}');
+window.location.href = "/"
+{% endif %}
+</script>
+{% endblock js %}

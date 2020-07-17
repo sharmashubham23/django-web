@@ -38,7 +38,8 @@ def handelSingup(request):
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.save()
-        messages.success(request, "Your Account is Successfully created.")
+        messages.success(
+            request, "Your Account is Successfully created. Please Sign Up using credentials.")
         return redirect('/shop')
 
     else:

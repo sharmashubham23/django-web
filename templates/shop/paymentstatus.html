@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title%} Green Fasion Cart Tracker{% endblock %}
+{% block body %}
+{% block head %}<script>
+localStorage.clear();
+</script>
+{% endblock head %}
+<div class="container">
+    <div class="col my-4">
+
+        <h2>Payment status regarding your order Id : {{response.ORDERID}}</h2>
+        {% if response.RESPCODE == '01' %}
+        ORDER SUCCESS
+        {% else %}
+        ORDER FAILURE
+        {% endif%}
+        <div class="container" style="margin-top: 20px;">
+        <h5>Currency :<span>{{response.CURRENCY}}</span></h5>
+        <h5>Gateway Name : {{response.GATEWAYNAME}}</h5>
+        <h5>Bank Name : {{response.BANKNAME}}</h5>
+        <h5>Total Amount :₹ {{response.TXNAMOUNT}}</h5>
+        <h5>Date : {{response.TXNDATE}}</h5>
+        </div>
+
+
+    </div>
+
+</div>
+{% endblock %}
+{% block js %}
+
+{% endblock %}
